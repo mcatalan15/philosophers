@@ -6,7 +6,7 @@
 #    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/03/07 11:42:42 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/03/07 12:12:27 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ LIBFT = libft.a
 
 NAME = philosphers
 
-SRCS =	src/main.c							
+SRCS =	src/main.c	\						
 
 OBJS = $(SRCS:.c=.o)
 
