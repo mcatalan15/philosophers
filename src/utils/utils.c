@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/05 20:03:48 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2023/05/07 12:33:26 by mcatalan@st      ###   ########.fr       */
+/*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
+/*   Updated: 2024/03/09 00:28:46 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/philo.h"
 
-/* A function that checks if the given integer is a valid ASCII value */
-
-int	ft_isascii(int c)
+int	ft_atoi(const char *str)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	int	i;
+	int	neg;
+	int	res;
+
+	i = 0;
+	neg = 1;
+	res = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (str[i] - '0') + (res * 10);
+		i++;
+	}
+	return (res * neg);
 }

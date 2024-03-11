@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/07 11:38:44 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/10 14:47:30 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 # define PHILO_H
 
 // System .h files
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <string.h>
-# include <dirent.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
-// Our .h files
-# include "libft/libft.h"
+// utils
+// utils.c
+int	ft_atoi(const char *str);
 
 #endif

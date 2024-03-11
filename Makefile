@@ -3,14 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
+#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/03/07 12:12:27 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/03/10 14:36:15 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# MACOS
 # Print MINISHELL and authors' names
 MINISHELL_MSG = PHILOSOPHERS
 AUTHORS_MSG = by mcatalan
@@ -27,28 +26,25 @@ BLUE = \033[0;34m
 VIOLET = \033[0;35m
 RESET = \033[0m
 
-LIBFT_D = includes/libft/
-LIBFT = libft.a
+NAME = philo
 
-NAME = philosphers
+SRCS =	src/main.c		\
+		src/utils/utils.c	\
 
-SRCS =	src/main.c	\						
 
 OBJS = $(SRCS:.c=.o)
-
 DEPS = $(SRCS:.c=.d)
+
+CONF_DIR = conf_files
 
 INCLUDE = -I./
 RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror #-v
 OFLAGS = -g #-fsanitize=address
 
-all: print_message libft $(NAME)
+all: print_message $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"
-
-libft:
-	@echo "$(YELLOW)Building libft...$(RESET)"
-	@make --no-print-directory -C $(LIBFT_D)
 
 print_message:
 	$(PRINT_MINISHELL)
@@ -58,22 +54,20 @@ print_message:
 	@echo "$(YELLOW)Compiling...$(RESET)"
 	@${CC} ${CFLAGS} -MMD $(INCLUDE) -c $< -o $@
 
-$(NAME): $(OBJS) $(LIBFT_D)$(LIBFT)
+$(NAME): $(OBJS)
 	@echo "$(YELLOW)Linking...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIBFT_D)$(LIBFT) $(OFLAGS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(OFLAGS)
 	@echo "$(GREEN)Linked!$(RESET)✅"
 -include $(DEPS)
 
 clean:
-	@make clean --no-print-directory -C $(LIBFT_D)
 	@$(RM) $(OBJS) $(DEPS)
-	@echo "$(RED)Cleaned minishell!$(RESET)✅"
+	@echo "$(RED)Cleaned philo!$(RESET)✅"
 
 fclean:
-	@make fclean --no-print-directory -C $(LIBFT_D)
 	@$(RM) $(NAME) $(DEPS) $(OBJS)
-	@echo "$(RED)Fcleaned minishell!$(RESET)✅"
+	@echo "$(RED)Fcleaned philo!$(RESET)✅"
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re
