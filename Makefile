@@ -6,7 +6,7 @@
 #    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/03/10 14:36:15 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2024/03/11 18:08:54 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,6 @@ SRCS =	src/main.c		\
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
-
-CONF_DIR = conf_files
 
 INCLUDE = -I./
 RM = rm -rf
