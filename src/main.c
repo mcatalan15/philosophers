@@ -3,31 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/10 14:44:22 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/13 10:59:41 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void	error_ext(char *str)
+{
+	printf("%s\n", str);
+	exit (EXIT_FAILURE);
+}
+
+int	parsing(char **argv)
+{
+	for (int i = 0; argv[i]; i++)
+		printf("argv %d: %s\n", i, argv[i]);
+	return (0);
+}
+
+int	exec_philo(char **argv)
+{
+	if (parsing(argv) == -1)
+		error_ext("Check arguments. Too long or not int");
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	int	number_of_philosophers = ft_atoi(argv[1]);
-	int	time_to_die = ft_atoi(argv[2]);
-	int	time_to_eat = ft_atoi(argv[3]);
-	int	time_to_sleep = ft_atoi(argv[4]);
-	int number_of_times_each_philosopher_must_eat;
-
-		if (argc == 6)
-			number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-	printf("number_of_philosophers:	%d\n", number_of_philosophers);
-	printf("time_to_die:	%d\n", time_to_die);
-	printf("time_to_eat:	%d\n", time_to_eat);
-	printf("time_to_sleep:	%d\n", time_to_sleep);
-
-	if (argc == 6)
-		printf("number_of_times_each_philosopher_must_eat:	%d\n", number_of_times_each_philosopher_must_eat);
+	if (argc == 5 || argc == 6)
+		exec_philo(argv);
+	else
+		error_ext("Wrong args. Philo needs 5 or 6 arguments");
 	return (0);
 }
