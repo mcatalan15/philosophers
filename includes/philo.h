@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/13 11:50:21 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/03/25 10:35:52 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # define PHILO_H
 
 // System .h files
-# include <string.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include <pthread.h>
+// # include <string.h>
+# include <stdio.h>		//printf
+# include <stdlib.h>	//malloc, free
+# include <unistd.h>	// write, usleep
+# include <stdbool.h>	// boolean usage
+# include <pthread.h>	//mutex: init destroy lock unlock
+						//threads: create join detach
+# include <sys/time.h>	//gettimeofday
+# include <limits.h>	// INT_MAX
 
 typedef struct s_philo
 {
