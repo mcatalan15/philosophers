@@ -1,0 +1,4 @@
+philo
+*.d
+*.o
+.DS_Store
