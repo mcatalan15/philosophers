@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/09 00:28:46 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/27 11:31:09 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,21 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (res * neg);
+}
+
+int	str_validator(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] >= '0' && s[i] <= '9')
+			i++;
+		else
+			return (1);
+	}
+	if (i > 10)
+		return (1);
+	return (0);
 }

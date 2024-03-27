@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/26 11:14:09 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/03/27 11:28:39 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ int	parsing(char **argv)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (argv[i])
 	{
 		printf("argv %d: %s\n", i, argv[i]);
+		if (str_validator(argv[i]) == 1)
+		{
+			printf("NO valid\n");
+			return (-1);
+		}
 		i++;
 	}
 	return (0);
@@ -34,7 +39,7 @@ int	parsing(char **argv)
 int	philo(char **argv)
 {
 	if (parsing(argv) == -1)
-		error_ext("Check arguments. Too long or not int");
+		error_ext("Check arguments. Too long, not int or negative num");
 	return (0);
 }
 
