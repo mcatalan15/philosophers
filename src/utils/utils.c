@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/27 11:31:09 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:36:17 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
+
+void	error_ext(char *str)
+{
+	printf(RED "%s\n" RST, str);
+	exit(EXIT_FAILURE);
+}
 
 int	ft_atoi(const char *str)
 {

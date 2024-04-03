@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/03/27 11:28:39 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:20:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	error_ext(char *str)
-{
-	printf("%s\n", str);
-	exit(EXIT_FAILURE);
-}
-
 int	parsing(char **argv)
 {
 	int	i;
+	int	num;
 
 	i = 1;
+	num = 0;
 	while (argv[i])
 	{
 		printf("argv %d: %s\n", i, argv[i]);
@@ -33,15 +29,53 @@ int	parsing(char **argv)
 		}
 		i++;
 	}
+	i = 1;
+	while (++i < 5)
+	{
+		num = ft_atoi(argv[i]);
+		if (num < 60)
+			error_ext("Error: Times need to be bigger than 60ms.\n"
+				"\tCheck time_to_die, time_to_eat and time_to_sleep");
+	}
 	return (0);
 }
 
+/*
+	exec_program function is used to execute the main program after all is
+	set up.
+*/
+
+// int	exec_program(t_table *table)
+// {
+// 	(void)table;
+// 	return (0);
+// }
+
+/*
+	philo function is the main function of the program.
+	First, it checks if the arguments are valid.
+	Then, it initializes the data.
+	After that, it executes the program.
+	Finally, it destroys the data.
+*/
+
 int	philo(char **argv)
 {
+	t_table	table;
+
 	if (parsing(argv) == -1)
 		error_ext("Check arguments. Too long, not int or negative num");
+	init_data(&table, argv);
+	// exec_program(&table);
+	clear_program(&table);
 	return (0);
 }
+
+/*
+	Filter for argc. Philo needs 5 or 6 arguments.
+	./philo 5 800 200 200 [optional: 7]
+	./philo philos time_to_die time_to_eat time_to_sleep [optional: max_meals]
+*/
 
 int	main(int argc, char **argv)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/03/27 11:17:01 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:31:35 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@
 # define BLUE "\033[0;34m"
 # define MAGENTA "\033[0;35m"
 # define CYAN "\033[0;36m"
-# define RESET "\033[0m"
+# define RST "\033[0m"
 
 // structs declaration
-typedef pthread_mutex_t	t_mtx;
+typedef pthread_mutex_t	mutex;
 typedef struct s_fork	t_fork;
 typedef struct s_philo	t_philo;
 typedef struct s_table	t_table;
 
-typedef struct s_fork
+struct s_fork
 {
-	t_mtx	fork;
+	mutex	fork;
 	int		id_fork;
-}			t_fork;
+};
 
-typedef struct s_philo
+struct s_philo
 {
 	int			id_philo;
 	int			c_meal; // counter of meals
@@ -56,9 +56,9 @@ typedef struct s_philo
 	t_fork		*l_fork;
 	t_fork		*r_fork;
 	pthread_t	id_thread;
-}				t_philo;
+};
 
-typedef struct s_table
+struct s_table
 {
 	int		n_philo;
 	int		t_die;   // time to die
@@ -69,11 +69,21 @@ typedef struct s_table
 	int		end;
 	t_fork	*forks;
 	t_philo	*philo;
-}			t_table;
+};
+
+// init.c
+int		init_data(t_table *table, char **argv);
+
+// clear_program.c
+int		clear_program(t_table *table);
 
 // utils
 // utils.c
-int	ft_atoi(const char *str);
-int	str_validator(char *s);
+int		ft_atoi(const char *str);
+int		str_validator(char *s);
+void	error_ext(char *str);
+
+// prints.c
+int		print_struct(t_table *table);
 
 #endif
