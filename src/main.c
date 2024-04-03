@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/03 12:20:20 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/03 13:11:29 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ int	parsing(char **argv)
 	num = 0;
 	while (argv[i])
 	{
-		printf("argv %d: %s\n", i, argv[i]);
 		if (str_validator(argv[i]) == 1)
-		{
-			printf("NO valid\n");
 			return (-1);
-		}
 		i++;
 	}
 	i = 1;
@@ -64,9 +60,11 @@ int	philo(char **argv)
 	t_table	table;
 
 	if (parsing(argv) == -1)
-		error_ext("Check arguments. Too long, not int or negative num");
+		error_ext("Check arguments.\n \tToo long, not int or negative num");
 	init_data(&table, argv);
+	print_struct(&table);
 	// exec_program(&table);
+	printf("iep\n");
 	clear_program(&table);
 	return (0);
 }
@@ -82,6 +80,6 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 		philo(argv);
 	else
-		error_ext("Wrong args. Philo needs 5 or 6 arguments");
+		error_ext("Wrong args.\n\tPhilo needs 5 or 6 arguments");
 	return (0);
 }

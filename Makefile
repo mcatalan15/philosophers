@@ -6,7 +6,7 @@
 #    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/04/03 11:32:20 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2024/04/03 12:49:24 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =	src/main.c			\
 		src/init.c			\
 		src/clear_program.c	\
 		src/utils/utils.c	\
+		src/utils/prints.c	\
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

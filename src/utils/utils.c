@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/03 11:36:17 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/03 13:10:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_ext(char *str)
 {
-	printf(RED "%s\n" RST, str);
+	printf(RED "Error: %s\n" RST, str);
 	exit(EXIT_FAILURE);
 }
 
