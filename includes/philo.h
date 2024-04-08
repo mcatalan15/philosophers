@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/03 13:17:34 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/08 10:52:36 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_fork	t_fork;
 typedef struct s_philo	t_philo;
 typedef struct s_table	t_table;
 
+// eliminar struct?
 struct s_fork
 {
 	mutex	fork;
@@ -56,6 +57,7 @@ struct s_philo
 	t_fork		*l_fork;
 	t_fork		*r_fork;
 	pthread_t	id_thread;
+	t_table		*table;
 };
 
 struct s_table
@@ -67,6 +69,8 @@ struct s_table
 	int		m_meals; // max meals (argv[5])
 	int		s_time;  // time_start
 	int		end;
+	mutex	init;
+	mutex	print;
 	t_fork	*forks;
 	t_philo	*philo;
 };

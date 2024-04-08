@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:24:53 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/03 12:19:19 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/08 10:38:56 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	init_philo(t_table *table)
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_philo);
 	if (!table->philo)
 		error_ext("Error: Malloc failed");
+	pthread_mutex_lock(&table->init);
 	while (i < table->n_philo)
 	{
 		table->philo[i].id_philo = i + 1;

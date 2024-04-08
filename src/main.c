@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/03 13:11:29 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/08 12:04:15 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,38 @@ int	parsing(char **argv)
 	return (0);
 }
 
+void	*loop(void *arg) // t_philo
+{
+	pthread_mutex_lock(init);
+}
+
 /*
 	exec_program function is used to execute the main program after all is
 	set up.
 */
 
-// int	exec_program(t_table *table)
-// {
-// 	(void)table;
-// 	return (0);
-// }
+int	exec_program(t_table *table)
+{
+	// (void)table;
+	int	i;
+
+	i = -1;
+	while (++i < table->n_philo)
+	{
+		if (pthread_create(&table->philo[i].id_thread, NULL, &loop , ) != 0)
+			error_ext("Failed to create threads");
+		else
+			printf("Philo %d created\n", i);
+	}
+	printf("creation finished\n");
+	i = -1;
+	while (&table->philo[++i])
+	{
+		
+	}
+	pthread_mutex_destroy()
+	return (0);
+}
 
 /*
 	philo function is the main function of the program.
@@ -62,8 +84,8 @@ int	philo(char **argv)
 	if (parsing(argv) == -1)
 		error_ext("Check arguments.\n \tToo long, not int or negative num");
 	init_data(&table, argv);
-	print_struct(&table);
-	// exec_program(&table);
+	// print_struct(&table);
+	exec_program(&table);
 	printf("iep\n");
 	clear_program(&table);
 	return (0);
