@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/03 13:10:20 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/08 17:17:39 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@ void	error_ext(char *str)
 {
 	printf(RED "Error: %s\n" RST, str);
 	exit(EXIT_FAILURE);
+}
+
+int	error_mtx(t_table	*table)
+{
+	if (pthread_mutex_lock(&table->death))
+		return (1);
+	table->end = 1;
+	if (pthread_mutex_unlock(&table->death))
+		return (1);
+	return (0);
 }
 
 int	ft_atoi(const char *str)

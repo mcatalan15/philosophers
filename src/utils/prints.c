@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 12:21:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/04 11:04:00 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/10 18:05:28 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ int	print_struct(t_table *table)
 	while (i < table->n_philo)
 	{
 		printf(YELLOW"Philosopher %d:\n" RST, i + 1);
-		printf(YELLOW"-Left fork: %p\n" RST, (void *)table->philo[i].l_fork);
-		printf(YELLOW"-Right fork: %p\n" RST, (void *)table->philo[i].r_fork);
-		printf(YELLOW"-Last meal time: %d\n" RST, table->philo[i].l_meal);
+		printf(YELLOW"-Left fork: %p\n" RST, (void *)table->philo[i].fork_l);
+		printf(YELLOW"-Right fork: %p\n" RST, (void *)table->philo[i].fork_r);
+		printf(YELLOW"-Last meal time: %d\n" RST, table->philo[i].t_l_meal);
 		printf(YELLOW"-Number of meals eaten: %d\n" RST, table->philo[i].c_meal);
 		printf("\n");
 		i++;
 	}
-	i = 0;
-	printf(YELLOW"Forks:\n" RST);
-	while (i < table->n_philo)
-	{
-		printf(YELLOW"-Fork %d:\n" RST, i + 1);
-		printf(YELLOW"--Is taken: %p\n" RST, (void *)table->forks[i].fork);
-		printf("\n");
-		i++;
-	}
+	// i = 0;
+	// printf(YELLOW"Forks:\n" RST);
+	// while (i < table->n_philo)
+	// {
+	// 	printf(YELLOW"-Fork %d:\n" RST, i + 1);
+	// 	printf(YELLOW"--Is taken: %p\n" RST, (void *)table->fork[i].fork);
+	// 	printf("\n");
+	// 	i++;
+	// }
 	return (0);
 }
