@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/11 11:51:24 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/14 20:49:17 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,63 +15,59 @@
 int	parsing(char **argv)
 {
 	int	i;
-	int	num;
 
-	i = 1;
-	num = 0;
-	while (argv[i])
-	{
-		if (str_validator(argv[i]) == 1)
-			return (-1);
-		i++;
-	}
 	i = 0;
-	while (++i < 6)
+	while (argv[++i])
 	{
-		num = ft_atoi(argv[i]);
-		if ((i == 1 || i == 5) && num < 1)
-			error_ext("Error: Number of philosophers and/or number of meals must be bigger than 0.");
-		if (i == 1 && num >= 200)
-			error_ext("Error: Number of philosophers must be less than 200.");
-		if ((i > 1 && i < 5) && num < 60)
-			error_ext("Error: Times need to be bigger than 60ms.\n"
-				"\tCheck time_to_die, time_to_eat and time_to_sleep");
-		printf("num: %d\n", num);
+		if ((ft_atoi(argv[i])) > INT_MAX)
+			error_ext("Number too big. Max number is 2147483648.");
+		else if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > 200) && i == 1)
+			error_ext("Number of philosophers must be between 0 and 200."\
+			"Both excluded.");
+		else if ((ft_atoi(argv[i]) < 60 || ft_atoi(argv[i]) > INT_MAX - 1)
+			&& (i > 1 && i < 5))
+			error_ext("Times need to be between 60ms and 2147483647ms."\
+			"Both included.");
+		else if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > INT_MAX - 1)
+			&& i == 5)
+			error_ext("Number of meals must be between 1 and 2147483647."\
+			"Both included.");
+		// need to check if there are only numbers or plus/minus signs
 	}
 	return (0);
 }
 
-// void	*loop(void *arg) // t_philo
-// {
-// 	pthread_mutex_lock(init);
-// }
+int	philo_action(t_philo *philo)
+{
+	(void)philo;
+	return (0);
+}
 
 /*
-	exec_program function is used to execute the main program after all is
-	set up.
+	
 */
 
-// int	exec_program(t_table *table)
-// {
-// 	int	i;
+int	exec_program(t_table *table)
+{
+	// (void)table;
+	int	i;
 
-// 	i = -1;
-// 	while (++i < table->n_philo)
-// 	{
-// 		if (pthread_create(&table->philo[i].id_thread, NULL, &loop , ) != 0)
-// 			error_ext("Failed to create threads");
-// 		else
-// 			printf("Philo %d created\n", i);
-// 	}
-// 	printf("creation finished\n");
-// 	// i = -1;
-// 	// while (&table->philo[++i])
-// 	// {
-		
-// 	// }
-// 	// pthread_mutex_destroy();
-// 	return (0);
-// }
+	i = 0;
+	while (i < table->n_philo)
+	{
+		if (pthread_create(&table->philo[i].thread, NULL, &philo_action, &table->philo[i]))
+			error_ext("Error: Thread creation failed");
+		i++;
+	}
+	i = 0;
+	while (i < table->n_philo)
+	{
+		if (pthread_join(table->philo[i].thread, NULL))
+			error_ext("Error: Thread join failed");
+		i++;
+	}
+	return (0);
+}
 
 /*
 	philo function is the main function of the program.
@@ -81,17 +77,19 @@ int	parsing(char **argv)
 	Finally, it destroys the data.
 */
 
-int	philo(char **argv)
+int	philo(int argc, char **argv)
 {
 	t_table	table;
 
-	if (parsing(argv) == -1)
-		error_ext("Check arguments.\n \tToo long, not int or negative num");
+	(void)argc;
+	memset(&table, 0, sizeof(t_table));
+	if (parsing(argv))
+		return (EXIT_FAILURE);
 	init_data(&table, argv);
 	print_struct(&table);
-	// exec_program(&table);
-	clear_program(&table);
-	printf("iep\n");
+	if (exec_program(&table))
+		return (EXIT_FAILURE);
+	clear_program(&table); //-> TO COMPLETE
 	return (0);
 }
 
@@ -104,7 +102,7 @@ int	philo(char **argv)
 int	main(int argc, char **argv)
 {
 	if (argc == 5 || argc == 6)
-		philo(argv);
+		philo(argc, argv);
 	else
 		error_ext("Wrong args.\n\tPhilo needs 5 or 6 arguments");
 	return (0);

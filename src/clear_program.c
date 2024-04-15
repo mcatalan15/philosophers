@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:31:30 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/10 18:06:52 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/14 20:42:20 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ int	clear_program(t_table *table)
 		pthread_mutex_destroy(&table->fork[i]);
 		i++;
 	}
-	free(table->fork);
-	free(table->philo);
+	pthread_mutex_destroy(&table->init);
+	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->meals);
+	if (table->philo)
+		free(table->philo);
+	if (table->fork)
+		free(table->fork);
 	return (0);
 }

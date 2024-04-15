@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 12:21:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/10 18:05:28 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/14 11:22:58 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,5 @@ int	print_struct(t_table *table)
 		printf("\n");
 		i++;
 	}
-	// i = 0;
-	// printf(YELLOW"Forks:\n" RST);
-	// while (i < table->n_philo)
-	// {
-	// 	printf(YELLOW"-Fork %d:\n" RST, i + 1);
-	// 	printf(YELLOW"--Is taken: %p\n" RST, (void *)table->fork[i].fork);
-	// 	printf("\n");
-	// 	i++;
-	// }
 	return (0);
 }
