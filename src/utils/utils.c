@@ -12,10 +12,9 @@
 
 #include "../../includes/philo.h"
 
-void	error_ext(char *str)
+void	print_err(char *str)
 {
 	printf(RED "Error: %s\n" RST, str);
-	exit(EXIT_FAILURE);
 }
 
 int	error_mtx(t_table	*table)
@@ -42,7 +41,7 @@ int	ft_atoi(const char *str)
 		while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 			i++;
 		if (str[i] == '-')
-			error_ext("Negative number.");
+			return (1);
 		else if (str[i] == '+')
 			i++;
 		while (str[i] >= '0' && str[i] <= '9')
@@ -50,8 +49,7 @@ int	ft_atoi(const char *str)
 			res = (str[i] - '0') + (res * 10);
 			i++;
 			if (res > INT_MAX)
-				error_ext("Number too big. Max number is 2147483647."\
-				"Included.");
+				return (1);
 		}
 	}
 	return (res * neg);

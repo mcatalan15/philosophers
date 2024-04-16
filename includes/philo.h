@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/14 20:35:58 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/15 10:37:24 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 // messages
 # define ERROR_MALLOC "Error: Malloc failed"
 # define ERROR_MTX "Error: Mutex init failed"
+# define ERROR_FORKS "Error: Forks init failed"
 
 // structs declaration
 // typedef pthread_mutex_t	mutex;
@@ -63,14 +64,14 @@ struct s_table
 	int				t_eat;   	// time to eat
 	int				t_sleep; 	// time to sleep
 	int				m_meals; 	// max meals (argv[5])
-	int				s_time;  	// time_start -> to initialize
-	int				end;		// 	philo died -> to initialize
-	int				c_threads; 	// 	threads counter -> to initialize
-	pthread_t		*philo_t; 	// pthread_t for philo
+	int				s_time;  	// time_start
+	int				end;		// philo died
+	int				c_threads; 	// threads counter
+	pthread_t	*philo_t; 	//	pthread_t for philo
 	pthread_mutex_t	init; 		// 	pthread_pthread_mutex_t_t for init
 	pthread_mutex_t	print; 		//	mutex for print
-	pthread_mutex_t	*fork; 		//	mutex for forks -> to initialize
-	pthread_mutex_t	meals; 	//	mutex for meals
+	pthread_mutex_t	*fork; 		//	mutex for forks
+	pthread_mutex_t	meals;		//	mutex for meals
 	pthread_mutex_t	death; 		//	mutex for death
 	t_philo			*philo;
 };
@@ -84,7 +85,7 @@ int		clear_program(t_table *table);
 // utils
 // utils.c
 int		ft_atoi(const char *str);
-void	error_ext(char *str);
+void		print_err(char *str);
 int		error_mtx(t_table *table);
 
 // prints.c

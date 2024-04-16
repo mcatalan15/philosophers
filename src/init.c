@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:24:53 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/14 20:48:17 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/15 11:40:45 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,19 @@ int	init_forks(t_table	*table)
 {
 	int	i;
 
-	i = 0;
 	table->fork = malloc(sizeof(pthread_mutex_t) * table->n_philo);
 	if (!table->fork)
-		error_ext("Error: Malloc failed");
+	{
+		print_err(ERROR_MALLOC);
+		return (EXIT_FAILURE);
+	}
+	i= 0;
 	while (i < table->n_philo)
 	{
 		if (pthread_mutex_init(&table->fork[i], NULL))
-			error_ext("Error: Mutex init failed");
+			print_err(ERROR_FORKS);
 		i++;
 	}
-	if (pthread_mutex_init(&table->init, NULL))
-		error_ext(ERROR_MTX);
-	if (pthread_mutex_init(&table->print, NULL))
-		error_ext(ERROR_MTX);
-	if (pthread_mutex_init(&table->meals, NULL)) // Error (&(table->meals), NULL)??
-		error_ext(ERROR_MTX);
 	return (0);
 }
 
@@ -50,8 +47,10 @@ int	init_philo(t_table *table)
 	i = 0;
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_philo);
 	if (!table->philo)
-		error_ext(ERROR_MALLOC);
-	pthread_mutex_lock(&table->init);
+	{
+		print_err(ERROR_MALLOC);
+		return (EXIT_FAILURE);
+	}
 	while (i < table->n_philo)
 	{
 		table->philo[i].id_philo = i + 1;
@@ -62,7 +61,7 @@ int	init_philo(t_table *table)
 		table->philo[i].fork_r = &table->fork[(i + 1) % table->n_philo];
 		i++;
 	}
-	table->philo[i - 1].fork_r = &table->fork[0];
+	table->philo[i -1].fork_r = &table->fork[0];
 	return (0);
 }
 
@@ -70,31 +69,25 @@ int	init_philo(t_table *table)
 	This function initializes the mutex variables.
 */
 
-// int	init_mtx(t_table *table)
-// {
-// 	int				i;
-// 	pthread_mutex_t	*mtx;
-
-// 	i = 0;
-// 	mtx = malloc(sizeof(pthread_mutex_t) * table->n_philo);
-// 	if (!mtx)
-// 		error_ext(ERROR_MALLOC);
-// 	while (i < table->n_philo)
-// 	{
-// 		if (pthread_mutex_init(&mtx[i], NULL))
-// 			error_ext(ERROR_MTX);
-// 		i++;
-// 	}
-// 	if (pthread_mutex_init(&table->init, NULL))
-// 		error_ext(ERROR_MTX);
-// 	if (pthread_mutex_init(&table->print, NULL))
-// 		error_ext(ERROR_MTX);
-// 	if (pthread_mutex_init(&table->fork, NULL))
-// 		error_ext(ERROR_MTX);
-// 	if (pthread_mutex_init(&table->meals, NULL))
-// 		error_ext(ERROR_MTX);
-// 	return (0);
-// }
+int	init_mtx(t_table *table)
+{
+	if (pthread_mutex_init(&table->init, NULL))
+	{
+		print_err(ERROR_MTX);
+		return (EXIT_FAILURE);
+	}
+	if (pthread_mutex_init(&table->print, NULL))
+	{
+		print_err(ERROR_MTX);
+		return (EXIT_FAILURE);
+	}
+	if (pthread_mutex_init(&table->meals, NULL))
+	{
+		print_err(ERROR_MTX);
+		return (EXIT_FAILURE);
+	}
+	return (0);
+}
 
 /*
 	This function sets the data of the table.
@@ -110,11 +103,12 @@ int	init_table(t_table *table, char **argv)
 		table->m_meals = ft_atoi(argv[5]);
 	else
 		table->m_meals = -1;
+	table->end = 0;
+	table->c_threads = 0;
 	table->fork = NULL;
 	table->philo_t = NULL;
 	table->philo = NULL;
 	table->s_time = 0;
-	table->end = 0;
 	return (0);
 }
 
@@ -129,7 +123,11 @@ int	init_table(t_table *table, char **argv)
 int	init_data(t_table *table, char **argv)
 {
 	init_table(table, argv);
-	init_philo(table);
-	init_forks(table);
+	if (init_forks(table))
+		return (EXIT_FAILURE);
+	if (init_philo(table))
+		return (EXIT_FAILURE);
+	if (init_mtx(table))
+		return (EXIT_FAILURE);
 	return (0);
 }
