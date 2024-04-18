@@ -3,75 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/16 10:54:14 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/18 12:11:02 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-int	parsing2(char **argv, int i)
-{
-	if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > INT_MAX - 1) && i == 5)
-	{
-		print_err("Numer of meals worng\n\tMust be between 1 and"\
-			" 2147483647. Both included.");
-		return (EXIT_FAILURE);
-	}
-	 // need to check if there are only numbers or plus/minus signs
-	return (0);
-}
-
-int	parsing(char **argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[++i])
-	{
-		if ((ft_atoi(argv[i])) > INT_MAX)
-		{
-			print_err("Number too big.\n\tMax number is 2147483648.");
-			return (EXIT_FAILURE);
-		}
-		else if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > 200) && i == 1)
-		{
-			print_err("Number of philosophers wrong\n\t"\
-				"Must be between 0 and 200. Both excluded.");
-			return (EXIT_FAILURE);
-		}
-		else if ((ft_atoi(argv[i]) < 60 || ft_atoi(argv[i]) > INT_MAX - 1)
-			&& (i > 1 && i < 5))
-		{
-			print_err("Time wrong\n\tTime need to be between 60ms and"\
-				" 2147483647ms. Both included.");
-			return (EXIT_FAILURE);
-		}
-		else if (parsing2(argv, i))
-			return (EXIT_FAILURE);
-	}
-	return (0);
-}
-
-long	time_convert(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-void	pause_time(long wait_time)
-{
-	long start;
-
-	start = time_convert();
-	usleep(wait_time * 850); //Porq 850?
-	while (time_convert() - start < wait_time)
-		usleep(wait_time * 6); //Porq 6?
-}
 
 /*
  */
@@ -96,21 +35,7 @@ void	*checker(t_table *table)
 
 /*
 */
-void	print_status(t_philo *philo, int id, char *str)
-{
-	if (philo->table->death == 0)
-	{
-		pthread_mutex_lock(&philo->table->print);
-		printf("%ld ", (time_convert() - philo->table->s_time));
-		printf("%d ", id);
-		printf("%s\n", str);
-		pthread_mutex_unlock(&philo->table->print);
-	}
-}
-
-/*
-*/
-int	*check_status(void *info)
+void	*check_status(void *info)
 {
 	t_table	*table;
 
@@ -155,7 +80,7 @@ void	*action(void *info)
 	t_philo	*philo;
 
 	philo = (t_philo *)info;
-	pthread_mutex_lock(&philo->table->init);
+	// pthread_mutex_lock(&philo->table->init); // ??
 	philo->table->c_threads++;
 	pthread_mutex_unlock(&philo->table->init);
 	while (philo->table->s_time == 0)
@@ -163,19 +88,27 @@ void	*action(void *info)
 	philo->t_l_meal = philo->table->s_time;
 	if (philo->table->n_philo == 1)
 	{
+		printf("HOla1\n");
 		print_status(philo, philo->id_philo, "Taken fork");
 		return (NULL);
 	}
+	printf("HOla2\n");
 	if (philo->id_philo % 2 == 1)
+	{
+		printf("HOla3\n");
 		pause_time(philo->table->t_eat / 2);
+	}
+	printf("HOla4\n");
 	while (philo->table->end == 0 && philo->c_meal < philo->table->m_meals)
 	{
+		printf("HOla5\n");
 		eat(philo);
 		print_status(philo, philo->id_philo, "Is sleeping");
 		if (philo->table->end == 0)
 			pause_time(philo->table->t_sleep);
 		print_status(philo, philo->id_philo, "Is thinking");
 	}
+	printf("HOla6\n");
 	return (0);
 }
 
@@ -184,10 +117,10 @@ void	*action(void *info)
 
 int	exec_program(t_table *table)
 {
-	int		i;
+	int			i;
 	pthread_t	*philo;
 
-	i = 0;
+	i = -1;
 	table->philo_t = malloc(sizeof(pthread_t) * (table->n_philo));
 	if (!table->philo_t)
 	{
@@ -195,9 +128,10 @@ int	exec_program(t_table *table)
 		return (1);
 	}
 	philo = table->philo_t;
-	while (i < table->n_philo)
+	pthread_mutex_lock(&table->init); // ??
+	while (++i < table->n_philo)
 	{
-		if (pthread_create(&philo[i], NULL, &action, (void *)&table->philo)!= 0)
+		if (pthread_create(&philo[i], NULL, &action, (void *)&table->philo) != 0)
 		{
 			print_err("Error creating philo\n");
 			return (1);
@@ -207,14 +141,14 @@ int	exec_program(t_table *table)
 			print_err("Error detaching philo\n");
 			return (1);
 		}
-		i++;
+		printf("HOLA7\n");
 	}
-	if (pthread_create(&table->end, NULL, &check_status, (void *)table) != 0)
+	if (pthread_create(&table->check_d, NULL, &check_status, (void *)table) != 0)
 	{
 		print_err("error checking death");
 		return (1);
 	}
-	pthread_join(table->end, NULL);
+	pthread_join(table->check_d, NULL);
 	return (0);
 }
 
@@ -233,7 +167,7 @@ int	philo(char **argv)
 	memset(&table, 0, sizeof(t_table));
 	if (init_data(&table, argv))
 		return (EXIT_FAILURE);
-	print_struct(&table);
+	//print_struct(&table);
 	if (exec_program(&table))
 		return (EXIT_FAILURE);
 	clear_program(&table); //-> TO COMPLETE

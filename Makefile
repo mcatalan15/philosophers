@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
+#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/04/03 12:49:24 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2024/04/18 11:56:32 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,10 @@ NAME = philo
 SRCS =	src/main.c			\
 		src/init.c			\
 		src/clear_program.c	\
+		src/utils/parsing.c	\
 		src/utils/utils.c	\
 		src/utils/prints.c	\
+		src/utils/time.c	\
 
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

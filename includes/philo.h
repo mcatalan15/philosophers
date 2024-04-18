@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/15 10:37:24 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/18 11:55:53 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_table	t_table;
 struct s_philo
 {
 	int				id_philo;
-	int				c_meal; // counter of meals
-	int				full;   // bool?
-	int				t_l_meal; // last meal time
+	int				c_meal; 	// counter of meals
+	int				full;   	// bool?
+	int				t_l_meal;	// last meal time
 	pthread_mutex_t	*fork_r;
 	pthread_mutex_t	*fork_l;
 	t_table			*table;
@@ -64,11 +64,12 @@ struct s_table
 	int				t_eat;   	// time to eat
 	int				t_sleep; 	// time to sleep
 	int				m_meals; 	// max meals (argv[5])
-								int				t_meals;	//total meals
+	int				t_meals;	//total meals
 	int				s_time;  	// time_start
 	int				end;		// philo died
 	int				c_threads; 	// threads counter
-	pthread_t	*philo_t; 	//	pthread_t for philo
+	pthread_t		*philo_t; 	//	pthread_t for philo
+	pthread_t		check_d;	//pthread_t for death check
 	pthread_mutex_t	init; 		// 	pthread_pthread_mutex_t_t for init
 	pthread_mutex_t	print; 		//	mutex for print
 	pthread_mutex_t	*fork; 		//	mutex for forks
@@ -84,12 +85,21 @@ int		init_data(t_table *table, char **argv);
 int		clear_program(t_table *table);
 
 // utils
+// parsing.c
+int	parsing(char **argv);
+
 // utils.c
 int		ft_atoi(const char *str);
-void		print_err(char *str);
 int		error_mtx(t_table *table);
 
 // prints.c
 int		print_struct(t_table *table);
+void	print_err(char *str);
+void	print_death(t_table *table, int i);
+void	print_status(t_philo *philo, int id, char *str);
+
+// time.c
+void	pause_time(long wait_time);
+long	time_convert(void);
 
 #endif

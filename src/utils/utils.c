@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 00:26:46 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/14 11:22:11 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/18 11:52:29 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
-
-void	print_err(char *str)
-{
-	printf(RED "Error: %s\n" RST, str);
-}
 
 int	error_mtx(t_table	*table)
 {

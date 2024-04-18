@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 11:24:53 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/15 11:40:45 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/18 10:21:53 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_forks(t_table	*table)
 		print_err(ERROR_MALLOC);
 		return (EXIT_FAILURE);
 	}
-	i= 0;
+	i = 0;
 	while (i < table->n_philo)
 	{
 		if (pthread_mutex_init(&table->fork[i], NULL))
