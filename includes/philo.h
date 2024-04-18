@@ -64,6 +64,7 @@ struct s_table
 	int				t_eat;   	// time to eat
 	int				t_sleep; 	// time to sleep
 	int				m_meals; 	// max meals (argv[5])
+								int				t_meals;	//total meals
 	int				s_time;  	// time_start
 	int				end;		// philo died
 	int				c_threads; 	// threads counter
