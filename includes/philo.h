@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/18 11:55:53 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:17:23 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // colors
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
-# define YELLOW "\033[0;33m"
+# define YLW "\033[0;33m"
 # define BLUE "\033[0;34m"
 # define MAGENTA "\033[0;35m"
 # define CYAN "\033[0;36m"
@@ -60,12 +60,12 @@ struct s_philo
 struct s_table
 {
 	int				n_philo;
-	int				t_die;   	// time to die
-	int				t_eat;   	// time to eat
-	int				t_sleep; 	// time to sleep
+	long			t_die;   	// time to die
+	long			t_eat;   	// time to eat
+	long			t_sleep; 	// time to sleep
 	int				m_meals; 	// max meals (argv[5])
 	int				t_meals;	//total meals
-	int				s_time;  	// time_start
+	long			s_time;  	// time_start
 	int				end;		// philo died
 	int				c_threads; 	// threads counter
 	pthread_t		*philo_t; 	//	pthread_t for philo
@@ -86,7 +86,7 @@ int		clear_program(t_table *table);
 
 // utils
 // parsing.c
-int	parsing(char **argv);
+int		parsing(char **argv);
 
 // utils.c
 int		ft_atoi(const char *str);

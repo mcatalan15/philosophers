@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 12:21:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/18 12:12:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/19 10:42:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ int	print_struct(t_table *table)
 	int	i;
 
 	i = 0;
-	printf(YELLOW"Table:\n"RST);
-	printf(YELLOW"-Number of philosophers: %d\n" RST, table->n_philo);
-	printf(YELLOW"-Time to die: %d\n" RST, table->t_die);
-	printf(YELLOW"-Time to eat: %d\n" RST, table->t_eat);
-	printf(YELLOW"-Time to sleep: %d\n" RST, table->t_sleep);
-	printf(YELLOW"-Number of times each philosopher"\
+	printf(YLW"Table:\n"RST);
+	printf(YLW"-Number of philosophers: %d\n" RST, table->n_philo);
+	printf(YLW"-Time to die: %ld\n" RST, table->t_die);
+	printf(YLW"-Time to eat: %ld\n" RST, table->t_eat);
+	printf(YLW"-Time to sleep: %ld\n" RST, table->t_sleep);
+	printf(YLW"-Number of times each philosopher"\
 		"must eat: %d\n"RST, table->m_meals);
 	printf("\n");
 	while (i < table->n_philo)
 	{
-		printf(YELLOW"Philosopher %d:\n" RST, i + 1);
-		printf(YELLOW"-Left fork: %p\n" RST, (void *)table->philo[i].fork_l);
-		printf(YELLOW"-Right fork: %p\n" RST, (void *)table->philo[i].fork_r);
-		printf(YELLOW"-Last meal time: %d\n" RST, table->philo[i].t_l_meal);
-		printf(YELLOW"-Number of meals eaten: %d\n" RST, table->philo[i].c_meal);
+		printf(YLW"Philosopher %d:\n" RST, i + 1);
+		printf(YLW"-Left fork: %p\n" RST, (void *)table->philo[i].fork_l);
+		printf(YLW"-Right fork: %p\n" RST, (void *)table->philo[i].fork_r);
+		printf(YLW"-Last meal time: %d\n" RST, table->philo[i].t_l_meal);
+		printf(YLW"-Number of meals eaten: %d\n" RST, table->philo[i].c_meal);
 		printf("\n");
 		i++;
 	}

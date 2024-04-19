@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/18 12:11:02 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:16:45 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	*action(void *info)
 
 	philo = (t_philo *)info;
 	// pthread_mutex_lock(&philo->table->init); // ??
+	print_struct(philo->table);
 	philo->table->c_threads++;
 	pthread_mutex_unlock(&philo->table->init);
 	while (philo->table->s_time == 0)
@@ -89,7 +90,7 @@ void	*action(void *info)
 	if (philo->table->n_philo == 1)
 	{
 		printf("HOla1\n");
-		print_status(philo, philo->id_philo, "Taken fork");
+		print_status(philo, philo->id_philo, "Has taken fork");
 		return (NULL);
 	}
 	printf("HOla2\n");
@@ -167,9 +168,9 @@ int	philo(char **argv)
 	memset(&table, 0, sizeof(t_table));
 	if (init_data(&table, argv))
 		return (EXIT_FAILURE);
-	//print_struct(&table);
 	if (exec_program(&table))
 		return (EXIT_FAILURE);
+	// print_struct(&table);
 	clear_program(&table); //-> TO COMPLETE
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/04/18 11:56:32 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/04/19 10:33:20 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ PRINT_AUTHORS = @echo "$(BLUE)$(AUTHORS_MSG)$(RESET)"
 # Colors
 RED = \033[0;31m
 GREEN = \033[0;32m
-YELLOW = \033[0;33m
+YLW = \033[0;33m
 BLUE = \033[0;34m
 VIOLET = \033[0;35m
 RESET = \033[0m
@@ -53,11 +53,11 @@ print_message:
 	$(PRINT_AUTHORS)
 
 %.o: %.c
-	@echo "$(YELLOW)Compiling...$(RESET)"
+	@echo "$(YLW)Compiling...$(RESET)"
 	@${CC} ${CFLAGS} -MMD $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@echo "$(YELLOW)Linking...$(RESET)"
+	@echo "$(YLW)Linking...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(OFLAGS)
 	@echo "$(GREEN)Linked!$(RESET)✅"
 -include $(DEPS)
