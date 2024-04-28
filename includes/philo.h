@@ -3,29 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/19 11:17:23 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/28 13:36:49 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-// System .h files
-// # include <string.h>
-# include <pthread.h> 	//mutex: init destroy lock unlock
-# include <stdbool.h> 	// boolean usage
-# include <stdio.h>   	//printf
-# include <stdlib.h>  	//malloc, free
-# include <sys/_pthread/_pthread_mutex_t.h>
-# include <sys/_pthread/_pthread_t.h>
-# include <unistd.h>   	// write, usleep
-                      	//threads: create join detach
-# include <limits.h>   	// INT_MAX
-# include <sys/time.h> 	//gettimeofday
-# include <string.h>		//memset
+# include <limits.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 // colors
 # define RED "\033[0;31m"
@@ -36,70 +30,79 @@
 # define CYAN "\033[0;36m"
 # define RST "\033[0m"
 
-// messages
-# define ERROR_MALLOC "Error: Malloc failed"
-# define ERROR_MTX "Error: Mutex init failed"
-# define ERROR_FORKS "Error: Forks init failed"
+// errors
+# define ERROR_NARGS "Number of arguments wrong\n\tMust be 4 or 5."
+# define ERROR_NPHILO "Number of philosophers:\n\tBetween 1 and 200 included."
+# define ERROR_NTIME "Time:\n\tBetween 60ms and 2147483647ms. Both included."
+# define ERROR_NMEALS "Numer of meals:\n\tBetween 1 and 2147483647 included."
+# define ERROR_MALLOC "\n\tMalloc failed"
+# define ERROR_MTX "\n\tMutex init failed"
+# define ERROR_FORKS "\n\tForks init failed"
+# define ERROR_THREADS_I "\n\tThreads init failed"
+# define ERROR_THREADS_D "\n\tThreads death check failed"
 
-// structs declaration
-// typedef pthread_mutex_t	mutex;
-typedef struct s_philo	t_philo;
 typedef struct s_table	t_table;
+typedef struct s_philo	t_philo;
 
-struct s_philo
+typedef struct s_philo
 {
-	int				id_philo;
-	int				c_meal; 	// counter of meals
-	int				full;   	// bool?
-	int				t_l_meal;	// last meal time
-	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*fork_l;
-	t_table			*table;
-};
+	int						id;
+	int						c_meal;
+	long long				l_meal;
+	pthread_mutex_t			*l_fork;
+	pthread_mutex_t			*r_fork;
+	t_table					*table;
+}	t_philo;
 
-struct s_table
+typedef struct s_table
 {
-	int				n_philo;
-	long			t_die;   	// time to die
-	long			t_eat;   	// time to eat
-	long			t_sleep; 	// time to sleep
-	int				m_meals; 	// max meals (argv[5])
-	int				t_meals;	//total meals
-	long			s_time;  	// time_start
-	int				end;		// philo died
-	int				c_threads; 	// threads counter
-	pthread_t		*philo_t; 	//	pthread_t for philo
-	pthread_t		check_d;	//pthread_t for death check
-	pthread_mutex_t	init; 		// 	pthread_pthread_mutex_t_t for init
-	pthread_mutex_t	print; 		//	mutex for print
-	pthread_mutex_t	*fork; 		//	mutex for forks
-	pthread_mutex_t	meals;		//	mutex for meals
-	pthread_mutex_t	death; 		//	mutex for death
-	t_philo			*philo;
-};
+	int						n_philo;
+	int						t_die;
+	int						t_eat;
+	int						t_sleep;
+	int						m_meals;
+	int						t_meals;
+	long long				t_creation;
+	int						is_dead;
+	int						active_threads;
+	pthread_t				*philos_th;
+	pthread_t				check_death;
+	pthread_mutex_t			*forks;
+	pthread_mutex_t			print;
+	pthread_mutex_t			init;
+	pthread_mutex_t			meals_mtx;
+	t_philo					*philo;
+}	t_table;
 
 // init.c
-int		init_data(t_table *table, char **argv);
+int				init_info(char **argv, t_table *table);
+
+//program.c
+int				exec_program(t_table *table);
+
+// checker.c
+void			*check_final(void *data);
+void			death_print(t_table *table, int i);
 
 // clear_program.c
-int		clear_program(t_table *table);
+int				clear_program(t_table *table);
 
 // utils
 // parsing.c
-int		parsing(char **argv);
-
-// utils.c
-int		ft_atoi(const char *str);
-int		error_mtx(t_table *table);
+int				parsing(char **argv);
 
 // prints.c
-int		print_struct(t_table *table);
-void	print_err(char *str);
-void	print_death(t_table *table, int i);
-void	print_status(t_philo *philo, int id, char *str);
+int				print_err(char *str);
+int				print_err2(t_table *table);
+int				print_struct(t_table *table);
+void			print_totals(t_table *table);
+void			print_status(t_philo *philo, int id, char *msg);
 
 // time.c
-void	pause_time(long wait_time);
-long	time_convert(void);
+long			ms_time(void);
+void			wait_t(long wait_time);
+
+// ft_atol.c
+long long int	ft_atol(const char *str);
 
 #endif

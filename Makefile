@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
+#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/04/19 10:33:20 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/04/28 13:36:00 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,11 @@ NAME = philo
 
 SRCS =	src/main.c			\
 		src/init.c			\
+		src/program.c		\
+		src/checker.c		\
 		src/clear_program.c	\
 		src/utils/parsing.c	\
-		src/utils/utils.c	\
+		src/utils/ft_atol.c	\
 		src/utils/prints.c	\
 		src/utils/time.c	\
 
@@ -42,8 +44,8 @@ DEPS = $(SRCS:.c=.d)
 INCLUDE = -I./
 RM = rm -rf
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-v
-OFLAGS = -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
+OFLAGS = -g #-fsanitize=thread
 
 all: print_message $(NAME)
 	@echo "$(GREEN)Build finished successfully!$(RESET)✅"

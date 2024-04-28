@@ -3,26 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:55:09 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/18 11:55:26 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/04/27 12:33:23 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
+/*
+	This is the second part of the main parsing function. Just checks the
+	values of the number of meals. If the value is not between 1 and INT_MAX
+	returns EXIT_FAILURE.
+*/
+
 int	parsing2(char **argv, int i)
 {
-	if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > INT_MAX - 1) && i == 5)
-	{
-		print_err("Numer of meals worng\n\tMust be between 1 and"\
-			" 2147483647. Both included.");
-		return (EXIT_FAILURE);
-	}
-	 // need to check if there are only numbers or plus/minus signs
+	if ((ft_atol(argv[i]) < 1 || ft_atol(argv[i]) > INT_MAX) && i == 5)
+		return (print_err(ERROR_NMEALS));
 	return (0);
 }
+
+/*
+	This function is used to check the arguments passed to the program.
+	Each argument has a range of values that can be accepted. If the
+	arguments are not in the correct range, the function returns EXIT_FAILURE.
+*/
 
 int	parsing(char **argv)
 {
@@ -31,24 +38,11 @@ int	parsing(char **argv)
 	i = 0;
 	while (argv[++i])
 	{
-		if ((ft_atoi(argv[i])) > INT_MAX)
-		{
-			print_err("Number too big.\n\tMax number is 2147483648.");
-			return (EXIT_FAILURE);
-		}
-		else if ((ft_atoi(argv[i]) < 1 || ft_atoi(argv[i]) > 200) && i == 1)
-		{
-			print_err("Number of philosophers wrong\n\t"\
-				"Must be between 0 and 200. Both excluded.");
-			return (EXIT_FAILURE);
-		}
-		else if ((ft_atoi(argv[i]) < 60 || ft_atoi(argv[i]) > INT_MAX - 1)
+		if ((ft_atol(argv[i]) < 1 || ft_atol(argv[i]) > 200) && i == 1)
+			return (print_err(ERROR_NPHILO)); // !!!!!!!
+		else if ((ft_atol(argv[i]) < 60 || ft_atol(argv[i]) > INT_MAX)
 			&& (i > 1 && i < 5))
-		{
-			print_err("Time wrong\n\tTime need to be between 60ms and"\
-				" 2147483647ms. Both included.");
-			return (EXIT_FAILURE);
-		}
+			return (print_err(ERROR_NTIME));
 		else if (parsing2(argv, i))
 			return (EXIT_FAILURE);
 	}
