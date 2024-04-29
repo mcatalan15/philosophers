@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prints.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 12:21:28 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/28 12:04:02 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/29 11:02:22 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	print_struct(t_table *table)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	printf(YLW"Table:\n"RST);
 	printf(YLW"-Number of philosophers: %d\n" RST, table->n_philo);
 	printf(YLW"-Time to die: %d\n" RST, table->t_die);
@@ -30,7 +30,7 @@ int	print_struct(t_table *table)
 	printf(YLW"-Number of times each philosopher"\
 		"must eat: %d\n"RST, table->m_meals);
 	printf("\n");
-	while (i < table->n_philo)
+	while (++i < table->n_philo)
 	{
 		printf(YLW"Philosopher %d:\n" RST, i + 1);
 		printf(YLW"-ID: %d\n" RST, table->philo[i].id);
@@ -39,7 +39,6 @@ int	print_struct(t_table *table)
 		printf(YLW"-Last meal time: %lld\n" RST, table->philo[i].l_meal);
 		printf(YLW"-Number of meals eaten: %d\n" RST, table->philo[i].c_meal);
 		printf("\n");
-		i++;
 	}
 	return (0);
 }
@@ -62,8 +61,8 @@ void	print_totals(t_table *table)
 }
 
 /*
-	This function is used to print the error message, clear the program and return
-	EXIT_FAILURE.
+	This function is used to print the error message, clear the program and
+	return EXIT_FAILURE.
 */
 
 int	print_err2(t_table *table)
@@ -87,9 +86,9 @@ int	print_err(char *str)
 }
 
 /*
-	This function is used to print the status of the philosopher. When its called
-	with the message of the status, the function locks the print mutex, prints the
-	message and unlocks the mutex.
+	This function is used to print the status of the philosopher. When its
+	called with the message of the status, the function locks the print
+	mutex, prints the message and unlocks the mutex.
 */
 
 void	print_status(t_philo *philo, int id, char *msg)

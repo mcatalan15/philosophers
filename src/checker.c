@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:08:11 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/28 13:38:00 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/29 11:06:16 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	death_print(t_table *table, int i)
 
 /*
 	This function checks if the philosopher has died or if the number of meals
-	indicated in argv[5] has been reached. If the philosopher has died, the function
-	death_print is called.
+	indicated in argv[5] has been reached. If the philosopher has died, the
+	function death_print is called.
 */
 
 void	*checker(t_table *table)
@@ -65,7 +65,6 @@ void	*check_final(void *data)
 	t_table	*table;
 
 	table = (t_table *)data;
-	printf("CHECKER - Thread ID: %ld\n", (long)pthread_self()); // delete
 	while (table->active_threads != table->n_philo)
 		wait_t(1);
 	table->t_creation = ms_time();

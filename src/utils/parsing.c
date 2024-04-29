@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:55:09 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/27 12:33:23 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/29 10:47:26 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	parsing(char **argv)
 	while (argv[++i])
 	{
 		if ((ft_atol(argv[i]) < 1 || ft_atol(argv[i]) > 200) && i == 1)
-			return (print_err(ERROR_NPHILO)); // !!!!!!!
+			return (print_err(ERROR_NPHILO));
 		else if ((ft_atol(argv[i]) < 60 || ft_atol(argv[i]) > INT_MAX)
 			&& (i > 1 && i < 5))
 			return (print_err(ERROR_NTIME));

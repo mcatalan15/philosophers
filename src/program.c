@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:08:04 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/28 13:41:45 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/29 11:06:25 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	*actions(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	printf("ACTION - Thread ID: %ld\n", (long)pthread_self()); // delete
 	pthread_mutex_lock(&philo->table->init);
 	philo->table->active_threads++;
 	pthread_mutex_unlock(&philo->table->init);

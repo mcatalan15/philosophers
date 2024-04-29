@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:19:05 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/28 13:35:44 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/04/29 11:11:36 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	philo(char **argv)
 	memset(&table, 0, sizeof(t_table));
 	if (init_info(argv, &table))
 		return (EXIT_FAILURE);
-	// print_struct(&table); // delete
 	if (exec_program(&table))
 		return (EXIT_FAILURE);
-	print_totals(&table); // delete
 	clear_program(&table);
 	return (0);
 }
