@@ -3,28 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:55:09 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/05/01 10:48:46 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:40:28 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-int	ft_is_digit(char *str)
+int	ft_isdigit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+int	ft_num_str(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] != '\0')
 	{
-		if (str[i] >= 0 && str[i] <= 9)
-			i++;
-		else
-			return (EXIT_FAILURE);
+		if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
+		{
+			return (0);
+		}
+		i++;
 	}
-	return (0);
+	return (1);
 }
 
 /*
@@ -53,7 +61,7 @@ int	parsing(char **argv)
 	i = 0;
 	while (argv[++i])
 	{
-		if (ft_is_digit(argv[i]) == 0)
+		if (ft_num_str(argv[i]))
 		{
 			if ((ft_atol(argv[i]) < 1 || ft_atol(argv[i]) > 200) && i == 1)
 				return (print_err(ERROR_NPHILO));
@@ -64,7 +72,7 @@ int	parsing(char **argv)
 				return (EXIT_FAILURE);
 		}
 		else
-			return (EXIT_FAILURE);
+			return (print_err(ERROR_ARGV));
 	}
 	return (0);
 }

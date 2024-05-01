@@ -6,7 +6,7 @@
 /*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:03:49 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/04/28 13:36:49 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/05/01 20:43:50 by mcatalan@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 // errors
 # define ERROR_NARGS "Number of arguments wrong\n\tMust be 4 or 5."
+# define ERROR_ARGV "Arguments wrong\n\tArguments must contain only numbers."
 # define ERROR_NPHILO "Number of philosophers:\n\tBetween 1 and 200 included."
 # define ERROR_NTIME "Time:\n\tBetween 60ms and 2147483647ms. Both included."
 # define ERROR_NMEALS "Numer of meals:\n\tBetween 1 and 2147483647 included."
@@ -41,6 +42,7 @@
 # define ERROR_THREADS_I "\n\tThreads init failed"
 # define ERROR_THREADS_D "\n\tThreads death check failed"
 
+// structures
 typedef struct s_table	t_table;
 typedef struct s_philo	t_philo;
 
@@ -74,6 +76,7 @@ typedef struct s_table
 	t_philo					*philo;
 }	t_table;
 
+//Function prototypes
 // init.c
 int				init_info(char **argv, t_table *table);
 

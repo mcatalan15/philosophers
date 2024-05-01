@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
+#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:38:40 by mcatalan          #+#    #+#              #
-#    Updated: 2024/04/29 10:55:05 by mcatalan         ###   ########.fr        #
+#    Updated: 2024/05/01 21:03:33 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Print MINISHELL and authors' names
+# # Print MINISHELL and authors' names
 MINISHELL_MSG = PHILOSOPHERS
 AUTHORS_MSG = by mcatalan
 MESSAGE_LEN = $$(($(shell echo $(MINISHELL_MSG) | wc -c) - 1))
