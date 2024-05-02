@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:08:11 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/29 11:06:16 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:19:42 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	*checker(t_table *table)
 {
 	int	i;
 
-	i = 0;
 	while (table->is_dead == 0)
 	{
-		i = 0;
-		while (i < table->n_philo)
+		i = -1;
+		while (++i < table->n_philo)
 		{
 			if (table->t_meals == (table->n_philo * table->m_meals))
 				return (NULL);
@@ -48,7 +47,6 @@ void	*checker(t_table *table)
 				death_print(table, i);
 				break ;
 			}
-			i++;
 		}
 	}
 	return (NULL);
