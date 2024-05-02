@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+        */
+/*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 11:55:09 by mcatalan          #+#    #+#             */
-/*   Updated: 2024/05/01 20:40:28 by mcatalan@st      ###   ########.fr       */
+/*   Updated: 2024/05/02 10:42:20 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 int	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
-int	ft_num_str(const char *str)
+int	ft_num_str(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i] != '\0')
+	i = -1;
+	if (str[0] == '+' || str[0] == '-')
+		i++;
+	while (str[++i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
+		if (ft_isdigit(str[i]))
 		{
+			printf("es digit: %s\n", str);
 			return (0);
 		}
-		i++;
 	}
 	return (1);
 }

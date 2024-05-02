@@ -6,7 +6,7 @@
 /*   By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 17:08:04 by mcatalan@st       #+#    #+#             */
-/*   Updated: 2024/04/29 11:06:25 by mcatalan         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:43:49 by mcatalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	exec_program(t_table *table)
 	table->philos_th = malloc(sizeof(pthread_t) * table->n_philo);
 	if (!table->philos_th)
 		return (print_err(ERROR_MALLOC));
-	print_struct(table);
 	while (++i < table->n_philo)
 	{
 		if (pthread_create(&table->philos_th[i],
