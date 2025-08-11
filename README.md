@@ -45,7 +45,7 @@ flowchart TD
 
 ### Installation  
 ```bash  
-git clone [your-repo-url] && cd philosophers  
+git clone https://github.com/mcatalan15/philosophers.git && cd philosophers  
 make  
 ```  
 **Requirements**:  
